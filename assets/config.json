@@ -1,52 +1,52 @@
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "inbounds": [
-        {
-            "listen": "0.0.0.0",
-            "port": 443,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "xray_uuid",
-						"flow": "xtls-rprx-direct",
-                        "level": 0,
-                        "email": "hello@xray"
-                    }
-                ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "dest": 80
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "xtls",
-                "xtlsSettings": {
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/etc/nginx/server.crt",
-                            "keyFile": "/etc/nginx/server.key"
-                        }
-                    ]
-                }
+  "log":{
+    "loglevel":"warning"
+  },
+  "inbounds":[
+    {
+      "listen":"0.0.0.0",
+      "port":443,
+      "protocol":"vless",
+      "settings":{
+        "clients":[
+          {
+            "id":"xray_uuid",
+            "flow":"xtls-rprx-direct",
+            "level":0,
+            "email":"hello@xray"
+          }
+        ],
+        "decryption":"none",
+        "fallbacks":[
+          {
+            "dest":80
+          }
+        ]
+      },
+      "streamSettings":{
+        "network":"tcp",
+        "security":"xtls",
+        "xtlsSettings":{
+          "alpn":[
+            "http/1.1"
+          ],
+          "certificates":[
+            {
+              "certificateFile":"/etc/nginx/server.crt",
+              "keyFile":"/etc/nginx/server.key"
             }
+          ]
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        }
-    ],
-	"routing":{
+      }
+    }
+  ],
+  "outbounds":[
+    {
+      "protocol":"freedom",
+      "tag":"direct"
+    }
+  ],
+  "routing":{
     "rules":[
       {
         "inboundTag":[
@@ -70,6 +70,4 @@
     "error":"/var/log/xray/error.log",
     "loglevel":"warning"
   }
-
 }
-

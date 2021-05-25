@@ -3,37 +3,36 @@ Xray (VLESS + XTLS) 简易搭建教程（不需要申请域名及证书）
 ---
 
 #### 特点
-搭建简单，无需要Linux知识，无需要登录服务器；默认使用websocket传输方式，服务器IP被GFW屏蔽的机率很小；自动安装BBR，低网络延迟
+搭建简单，无需要Linux知识，无需要登录服务器；默认使用VLESS + XTLS传输方式，服务器IP被GFW屏蔽的机率很小；自动安装BBR，低网络延迟
 
 ---
 
 #### 搭建步骤
 
-有众多公有云平台可供选择搭建v2ray服务器，下面以Vultr和DigitalOcean为例：
+有众多公有云平台可供选择搭建Xray服务器，下面以Vultr和DigitalOcean为例：
 
 #### [Vultr平台](https://my.vultr.com/)
 
-1. 创建 [Startup Script](https://my.vultr.com/startup/), 内容为如下脚本。其中 path 和 uuid 的值可以自行进行修改，但不能去掉/符号（客户端配置项要与此一致）
+1. 创建 [Startup Script](https://my.vultr.com/startup/), 内容为如下脚本。其中 uuid 的值可以自行进行修改（客户端配置项要与此一致）
 
 ```
 #!/bin/bash
 # author: gfw-breaker
 
-path=/ray
 uuid=3579436c-b37e-11eb-8529-0242ac130003
 
 yum install -y git
-git clone https://github.com/gfw-breaker/easy-v2ray.git
+git clone https://github.com/gfw-breaker/easy-xray.git
 
 # install 
-cd easy-v2ray
+cd easy-xray
 cat > params.txt <<EOF
-path=$path
 uuid=$uuid
 EOF
 
-bash assets/install-v2ray.sh
+bash assets/install-xray.sh
 bash assets/install-bbr.sh
+
 ```
 
 2. 创建 [New Instance](https://my.vultr.com/deploy/) ,在 Server Type 中选择 CentOS 7 x64 Without SELinux, 在 Startup Script 中选择刚创建好的脚本，点击 Deploy Now 进行部署
